@@ -5,18 +5,6 @@ import be.continuum.data.Car
 import be.continuum.data.KotlinUser
 
 fun main(args: Array<String>) {
-    /*val user = User()
-    user.surname = "Jan"
-    user.name = "Dockx"
-    val address = Address()
-    address.number = 100
-    user.address = address
-    val car = Car()
-    car.brand = "VW"
-    car.model = "Golf"
-    car.price = 25000
-    car.pollutionCo2 = 89
-    user.car = car*/
 
     val user1 = user {
         it.surname = "Tom"
