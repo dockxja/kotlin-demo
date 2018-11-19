@@ -2,19 +2,19 @@ package be.continuum.data;
 
 import org.junit.Test;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
 
 public class UserTest {
 
     @Test
     public void createUser() {
-        User user = new User("John", "Doe");
+        User user = createJohnDoeUser();
 
         assertThat(user.getSurname(), equalTo("John"));
         assertThat(user.getName(), equalTo("Doe"));
         assertThat(user.getAge(), nullValue());
+        assertThat(user.toString(), containsString("be.continuum.data.User@"));
     }
 
     @Test
@@ -25,20 +25,25 @@ public class UserTest {
         assertThat(user.getAge(), equalTo(30));
     }
 
-    private User createJohnDoeUser() {
-        return new User("John", "Doe");
-    }
-
     @Test
     public void createKotlinUser() {
-        KotlinUser user = new KotlinUser("John", "Doe");
+        KotlinUser user = new KotlinUser();
+        user.setSurname("John");
+        user.setName("Doe");
         user.setAge(30);
 
         assertThat(user.getSurname(), equalTo("John"));
         assertThat(user.getName(), equalTo("Doe"));
         assertThat(user.getAge(), equalTo(30));
 
-        assertThat(user.toString(), equalTo("KotlinUser(surname=John, name=Doe)"));
+        assertThat(user.toString(), equalTo("KotlinUser(surname=John, name=Doe, age=30, address=null, car=null)"));
+    }
+
+    private User createJohnDoeUser() {
+        User user = new User();
+        user.setSurname("John");
+        user.setName("Doe");
+        return user;
     }
 
 }

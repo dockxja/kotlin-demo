@@ -1,13 +1,60 @@
 package be.continuum
 
-class KotlinMain {
+import be.continuum.data.Address
+import be.continuum.data.Car
+import be.continuum.data.KotlinUser
 
-    fun main(args: Array<String>) {
-        if (args.isEmpty()) {
-            println("Please provide a name as a command-line argument")
-            return
+fun main(args: Array<String>) {
+    /*val user = User()
+    user.surname = "Jan"
+    user.name = "Dockx"
+    val address = Address()
+    address.number = 100
+    user.address = address
+    val car = Car()
+    car.brand = "VW"
+    car.model = "Golf"
+    car.price = 25000
+    car.pollutionCo2 = 89
+    user.car = car*/
+
+    val user1 = user {
+        it.surname = "Tom"
+        it.name = "Tytgat"
+        it.address = address {
+            number = 101
+            street = "Kek"
         }
-        println("Hello, ${args[0]}!")
+        it.car = car {
+            brand = "BMW"
+            model = "1"
+            pollutionCo2 = 99
+        }
     }
 
+    val user2 = user {
+        it.surname = "Jan"
+        it.name = "Dockx"
+        it.address = address {
+            number = 1337
+            street = "Street"
+        }
+        it.car = car {
+            brand = "VW"
+            model = "Golf"
+            pollutionCo2 = 114
+        }
+    }
+
+    println("Hello, $user1 and $user2!")
 }
+
+fun user(block: (KotlinUser) -> Unit): KotlinUser {
+    val p = KotlinUser()
+    block(p)
+    return p
+}
+
+fun address(block: Address.() -> Unit): Address = Address().apply(block)
+
+fun car(block: Car.() -> Unit): Car = Car().apply(block)

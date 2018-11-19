@@ -17,6 +17,7 @@ class KotlinUserTest {
     fun createUser() {
         val user = KotlinUser(name = "Doe", surname = "John")
 
+        assertThat(user.getFullName(), equalTo("John Doe"))
         assertThat(user.surname, equalTo("John"))
         assertThat(user.name, equalTo("Doe"))
         assertThat(user.age, nullValue())
@@ -69,7 +70,9 @@ class KotlinUserTest {
 
     @Test
     fun createJavaUser() {
-        val user = User("John", "Doe")
+        val user = User()
+        user.surname = "John"
+        user.name = "Doe"
         user.age = 30
 
         assertThat(user.surname, equalTo("John"))
