@@ -21,7 +21,7 @@ class KotlinUserTest {
         assertThat(user.surname, equalTo("John"))
         assertThat(user.name, equalTo("Doe"))
         assertThat(user.age, nullValue())
-        assertThat(user.toString(), equalTo("KotlinUser(surname=John, name=Doe)"))
+        assertThat(user.toString(), equalTo("KotlinUser(surname=John, name=Doe, age=null, address=null, car=null)"))
     }
 
     @Test
@@ -31,7 +31,7 @@ class KotlinUserTest {
 
         assertThat(user.getFullName(), equalTo("John Doe"))
         assertThat(user.age, equalTo(30))
-        assertThat(user.toString(), equalTo("KotlinUser(surname=John, name=Doe)"))
+        assertThat(user.toString(), equalTo("KotlinUser(surname=John, name=Doe, age=30, address=null, car=null)"))
     }
 
     private fun createJohnDoeUser() = KotlinUser("John", "Doe")
