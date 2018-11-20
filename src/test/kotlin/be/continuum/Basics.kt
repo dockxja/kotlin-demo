@@ -166,4 +166,17 @@ class Basics {
         */
     }
 
+    private class Z(private val z: Int): Y(0), X {
+        override fun x() {
+            println(y)
+        }
+    }
+
+    // Class should be explicitly open or abstract to be extendable. Final by default!
+    private abstract class Y(internal val y: Int): X
+
+    private interface X {
+        fun x()
+    }
+
 }

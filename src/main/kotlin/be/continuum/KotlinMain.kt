@@ -20,5 +20,5 @@ fun main(args: Array<String>) {
     user.address = address
     user.car = car
 
-    println(String.format("Hello, %s!", user))
+    println("Hello, $user!")
 }
