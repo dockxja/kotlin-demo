@@ -166,6 +166,16 @@ class Basics {
         */
     }
 
+    @Test
+    fun extensionTest() {
+        var field: String? = null
+        assertThat(field.isNotNullOrBlank(), `is`(false))
+        field = ""
+        assertThat(field.isNotNullOrBlank(), `is`(false))
+        field = "Hello World!"
+        assertThat(field.isNotNullOrBlank(), `is`(true))
+    }
+
     private class Z(private val z: Int): Y(0), X {
         override fun x() {
             println(y)

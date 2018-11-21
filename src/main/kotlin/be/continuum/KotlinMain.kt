@@ -10,15 +10,17 @@ fun main(args: Array<String>) {
     car.model = "Golf"
     car.pollutionCo2 = 114
 
-    val address = Address()
-    address.number = 1337
-    address.street = "Street"
+    val address = Address().apply {
+        number = 1337
+        street = "Street"
+    }
 
-    val user = User()
-    user.surname = "Jan"
-    user.name = "Dockx"
-    user.address = address
-    user.car = car
+    val user = User().let {
+        it.surname = "Jan"
+        it.name = "Dockx"
+        it.address = address
+        it.car = car
+    }
 
     println("Hello, $user!")
 }
