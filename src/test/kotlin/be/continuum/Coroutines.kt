@@ -43,15 +43,15 @@ class Coroutines {
     @Test
     fun lightweight() = runBlocking {
         // Launch a lot of coroutines
-        GlobalScope.launch {
-            repeat(100_000) {
+        repeat(100_000) {
+            GlobalScope.launch {
                 val delayInMillis = Random.nextLong(1000, 5000)
                 delay(delayInMillis)
                 println("I'm sleeping $delayInMillis ms ...")
             }
         }
         runBlocking {
-            delay(4500)
+            delay(5000)
         }
     }
 
