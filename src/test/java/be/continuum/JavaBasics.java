@@ -17,4 +17,11 @@ public class JavaBasics {
         assertThat(Utils.isNotNullOrBlank(field), is(true));
     }
 
+    @Test
+    public void singletonExample() {
+        SingletonExample.INSTANCE.hello();
+        SingletonExample.INSTANCE.hello();
+        SingletonExample.INSTANCE.hello();
+    }
+
 }

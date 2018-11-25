@@ -2,7 +2,7 @@ package be.continuum
 
 import be.continuum.data.Address
 import be.continuum.data.Car
-import be.continuum.data.User
+import be.continuum.data.KotlinUser
 
 fun main(args: Array<String>) {
     val car = Car()
@@ -15,11 +15,12 @@ fun main(args: Array<String>) {
         street = "Street"
     }
 
-    val user = User().let {
-        it.surname = "Jan"
-        it.name = "Dockx"
-        it.address = address
-        it.car = car
+    val user = KotlinUser().let { user ->
+        user.surname = "Jan"
+        user.name = "Dockx"
+        user.address = address
+        user.car = car
+        user
     }
 
     println("Hello, $user!")

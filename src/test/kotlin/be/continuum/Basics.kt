@@ -4,8 +4,30 @@ import be.continuum.data.KotlinUser
 import org.hamcrest.CoreMatchers.*
 import org.junit.Assert.assertThat
 import org.junit.Test
+import java.time.LocalDate
 
 class Basics {
+
+    @Test
+    fun `if`() {
+        // String event;
+        // if (LocalDate.now().isEqual(LocalDate.of(2018, 11, 27))) {
+        //    event = "Tribe Day"
+        // } else {
+        //    event = "Not Tribe Day"
+        // }
+        val event = if (LocalDate.now().isEqual(LocalDate.of(2018, 11, 27))) {
+            "Tribe Day"
+        } else {
+            "Not Tribe Day"
+        }
+    }
+
+    @Test
+    fun elvisOperator() {
+        val userCar = KotlinUser().car?.brand ?: "BMW"
+        assertThat(userCar, equalTo("BMW"))
+    }
 
     @Test
     fun `switch - when`() {
@@ -33,7 +55,7 @@ class Basics {
             result = "from 1 to 10";
             break;
           default:
-            if (x < 12 && x > 14) {
+            if (x <= 12 && x => 14) {
               result = "not from 12 to 14";
               break;
             }
@@ -99,7 +121,7 @@ class Basics {
     @Test
     fun forStream() {
         val carBrands = createCarBrandsArray()
-        val filteredCarBrands = carBrands.filterNot { it == "Skoda" }.toList()
+        val filteredCarBrands = carBrands.filterNot({ it -> it == "Skoda" }).toList()
         assertThat(filteredCarBrands, not(hasItem("Skoda")))
     }
 
@@ -174,6 +196,50 @@ class Basics {
         assertThat(field.isNotNullOrBlank(), `is`(false))
         field = "Hello World!"
         assertThat(field.isNotNullOrBlank(), `is`(true))
+    }
+
+    @Test
+    fun rawString() {
+        print("Hello World!\n" +
+                "This shows the inconvenience of a regular string.\n" +
+                "\tEscaping required!")
+
+        println("""
+            |Hello World!
+            |This shows the convenience of a raw string.
+            |   No escaping required!
+        """.trimMargin(marginPrefix = "|"))
+        // "|" is default so it can be omitted.
+
+        println("C:\\Program Files\\Java\\")
+        println("""C:\Program Files\Java""")
+    }
+
+    @Test
+    fun inlineFunction() {
+        inlinedFunction {
+            println("do something here")
+        }
+
+        // No function instance will be created!
+        // The code around the invocation block is copied to the call site.
+        // Compiles to:
+        // println("before")
+        // println("do something here")
+        // println("after")
+    }
+
+    private inline fun inlinedFunction(body: () -> Unit) {
+        println("before")
+        body.invoke()
+        println("after")
+    }
+
+    @Test
+    fun singleton() {
+        SingletonExample.hello()
+        SingletonExample.hello()
+        SingletonExample.hello()
     }
 
     private class Z(private val z: Int): Y(0), X {
