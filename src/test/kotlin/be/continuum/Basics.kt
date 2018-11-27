@@ -1,6 +1,7 @@
 package be.continuum
 
 import be.continuum.data.KotlinUser
+import be.continuum.data.User
 import org.hamcrest.CoreMatchers.*
 import org.junit.Assert.assertThat
 import org.junit.Test
@@ -25,7 +26,11 @@ class Basics {
 
     @Test
     fun elvisOperator() {
-        val userCar = KotlinUser().car?.brand ?: "BMW"
+        val user = KotlinUser()
+        var fallbackUser: User? = null
+        val userCar = user.car?.brand
+                ?: fallbackUser?.car?.brand
+                ?: "BMW"
         assertThat(userCar, equalTo("BMW"))
     }
 
@@ -126,7 +131,7 @@ class Basics {
     }
 
     @Test
-    fun forWithIndex() {
+    fun forWithIndexDestructuring() {
         val carBrands = createCarBrandsArray()
         for ((index, brand) in carBrands.withIndex()) {
             println("$index: $brand")
@@ -200,7 +205,7 @@ class Basics {
 
     @Test
     fun rawString() {
-        print("Hello World!\n" +
+        println("Hello World!\n" +
                 "This shows the inconvenience of a regular string.\n" +
                 "\tEscaping required!")
 
